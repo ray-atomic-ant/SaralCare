@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>html{color-scheme:light}body{margin:0;font:14px system-ui,-apple-system,"Segoe UI",sans-serif}img{max-width:100%}</style>
+<title>SaralCare Pitch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=Noto+Sans+Devanagari:wght@500;600&display=swap">
+<style>
+/* Layout: a 16:9 deck (1280x720 canvas, scaled to fit) in saralcare.com's own system: paper and oat slides, forest slides for the big moments, terracotta for one phrase per title. Single light theme, as on the live site. */
+:root{
+  --forest:#11473d; --forest-2:#2f5648; --ink-2:#566860; --ink-3:#8b978e;
+  --leaf:#5e8a55; --terracotta:#d25f2d; --terracotta-wash:#fbede6; --peach:#f0a37f;
+  --paper:#fbfaf5; --paper-2:#f2f1e8; --sage-wash:#ebf3e4; --white:#fff;
+  --line:#22463c1f; --on-forest:#e6eedd; --on-forest-2:#b9cbbd; --desk:#e4e2d6;
+  --serif:"Newsreader",Georgia,serif; --sans:"Inter Tight",Inter,-apple-system,"Segoe UI",sans-serif;
+  --deva:"Noto Sans Devanagari","Inter Tight",sans-serif;
+  --shadow:0 24px 60px -36px #22463c80; --shadow-sm:0 10px 30px -22px #22463c4d;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--desk);color:var(--forest);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--desk)}
+p,h1,h2,h3,ul,ol{margin:0}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:rgba(228,226,214,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar .in{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;height:56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar .brand svg{height:26px;width:auto;display:block}
+.bar .meta{font-size:13px;color:var(--ink-2)}
+.bar button{font:500 14px var(--sans);background:var(--forest);color:#fff;border:0;border-radius:999px;padding:9px 18px;cursor:pointer}
+.bar button:focus-visible{outline:2px solid var(--terracotta);outline-offset:3px}
+html{scroll-snap-type:y mandatory}
+.deck{display:block}
+.frame{position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;background:var(--paper);scroll-snap-align:start;scroll-snap-stop:always}
+.pager{display:flex;align-items:center;justify-content:center;gap:14px;height:60px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.pager button{font:500 14px var(--sans);background:var(--white);color:var(--forest);border:1px solid var(--line);border-radius:999px;padding:8px 18px;cursor:pointer}
+.pager button:disabled{opacity:.4;cursor:default}
+.pager button:focus-visible{outline:2px solid var(--terracotta);outline-offset:3px}
+.pager .count{font-size:14px;color:var(--ink-2);min-width:5.5em;text-align:center;font-variant-numeric:tabular-nums}
+body.present .pager{display:none}
+.slide{position:absolute;top:50%;left:50%;width:1280px;height:720px;transform-origin:center;transform:translate(-50%,-50%) scale(var(--s,.5));padding:52px 64px 56px;display:flex;flex-direction:column;background:var(--paper);overflow:hidden}
+.slide.oat{background:var(--paper-2)}
+.slide.dark{background:var(--forest);color:var(--on-forest)}
+.num{position:absolute;right:40px;bottom:28px;font-size:13px;color:var(--ink-3);letter-spacing:.08em;font-variant-numeric:tabular-nums}
+.foot{position:absolute;left:64px;bottom:28px;font-size:13px;color:var(--ink-3)}
+.dark .num,.dark .foot{color:var(--on-forest-2)}
+.eyebrow{font-size:14px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--terracotta)}
+.dark .eyebrow{color:var(--peach)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;color:var(--forest);text-wrap:balance}
+.dark h1,.dark h2,.dark h3{color:#fff}
+h2{font-size:46px;line-height:1.08;letter-spacing:-.02em;margin-top:12px}
+h3{font-size:26px;line-height:1.2;font-weight:500;letter-spacing:-.01em}
+em{font-style:italic;color:var(--terracotta)}
+.dark em{color:var(--peach)}
+.sub{font-size:20px;line-height:1.45;color:var(--forest-2);max-width:940px;margin-top:12px}
+.dark .sub{color:var(--on-forest-2)}
+.body{margin-top:auto;margin-bottom:auto;padding-top:22px}
+.card{background:var(--white);border-radius:20px;padding:24px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:10px;min-width:0}
+.card p{font-size:19px;line-height:1.4;color:var(--ink-2)}
+.k{font-family:var(--serif);font-style:italic;color:var(--terracotta);font-size:19px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.tag{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:var(--sage-wash);color:var(--forest-2)}
+.tag.t{background:var(--terracotta-wash);color:var(--terracotta)}
+
+/* 1 title */
+.title .mark{position:absolute;right:-60px;top:70px;width:560px;opacity:.12}
+.title .mark svg{width:100%;height:auto}
+.title h1{font-size:100px;line-height:.98;letter-spacing:-.03em;margin-top:22px}
+.title .sub{font-size:24px;max-width:720px}
+.title .bottom{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;border-top:1px solid var(--line);padding-top:22px}
+.title .bottom svg{height:34px;width:auto}
+.title .bottom p{font-size:15px;color:var(--ink-2);text-align:right;line-height:1.5}
+
+/* data */
+.stats{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:20px}
+.stat{border-radius:22px;padding:30px;display:flex;flex-direction:column;gap:12px;background:var(--white);box-shadow:var(--shadow-sm)}
+.stat.hero{background:var(--forest);color:var(--on-forest)}
+.stat b{font-family:var(--serif);font-weight:400;font-size:76px;line-height:.95;letter-spacing:-.03em;color:var(--forest);font-variant-numeric:lining-nums}
+.stat.hero b{color:#fff}
+.stat .arrow{font-family:var(--sans);font-size:30px;color:var(--peach);margin:0 6px;vertical-align:middle}
+.stat p{font-size:18px;line-height:1.45;color:var(--ink-2)}
+.stat.hero p{color:var(--on-forest-2)}
+.stat small{font-size:13px;color:var(--ink-3);margin-top:auto}
+.stat.hero small{color:var(--on-forest-2)}
+
+/* gap */
+.gap .col{border-radius:22px;padding:28px;display:flex;flex-direction:column;gap:14px;border:1px solid var(--line);background:var(--white)}
+.gap .col.us{background:var(--forest);border-color:var(--forest);color:var(--on-forest)}
+.gap .col.us h3{color:#fff}
+.yn{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.yn div{display:flex;justify-content:space-between;align-items:center;font-size:17px;border-top:1px solid var(--line);padding-top:10px}
+.us .yn div{border-color:rgba(230,238,221,.2)}
+.yn span.y{font-weight:600;color:var(--leaf)}
+.yn span.n{font-weight:600;color:var(--ink-3)}
+.us .yn span.y{color:var(--peach)}
+.gap .col p{font-size:17px;line-height:1.45;color:var(--ink-2)}
+.gap .col.us p{color:var(--on-forest-2)}
+
+/* rhythm */
+.rhythm{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rhythm .card{padding:22px}
+.rhythm .when{font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--terracotta)}
+.rhythm .card p{font-size:19px}
+
+/* circles */
+.circles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.circle{border:1px solid rgba(230,238,221,.22);border-radius:22px;padding:20px 22px;display:flex;flex-direction:column;gap:7px;min-width:0}
+.circle.l2{background:rgba(255,255,255,.05)}
+.circle.l3{background:rgba(255,255,255,.1)}
+.circle .deva{font-family:var(--deva);font-weight:600;font-size:18px;color:var(--peach)}
+.circle .role{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--on-forest-2)}
+.circle .verbs{font-family:var(--serif);font-style:italic;font-size:19px;color:#fff}
+.circle ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:7px;margin-top:4px}
+.circle li{padding-left:16px;position:relative;font-size:17px;line-height:1.35;color:var(--on-forest)}
+.circle li::before{content:"";position:absolute;left:0;top:.55em;width:6px;height:6px;border-radius:50%;background:var(--leaf)}
+.circle .plus{font-size:13px;color:var(--peach);font-weight:600;letter-spacing:.04em}
+.drift{margin-top:16px;display:flex;align-items:center;gap:14px;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--on-forest-2)}
+.drift i{flex:1;height:2px;background:linear-gradient(90deg,rgba(230,238,221,.15),var(--peach))}
+
+/* app grid */
+.app{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.feat{background:var(--white);border-radius:18px;padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow-sm)}
+.feat .ic{width:36px;height:36px;border-radius:10px;background:var(--terracotta-wash);display:grid;place-items:center}
+.feat .ic svg{width:20px;height:20px;stroke:var(--terracotta);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.feat b{font-size:19px;font-weight:600;color:var(--forest)}
+.feat p{font-size:16px;line-height:1.35;color:var(--ink-2)}
+
+/* whatsapp */
+.wa{display:grid;grid-template-columns:1fr 400px;gap:48px;align-items:center}
+.steps{list-style:none;padding:0;display:flex;flex-direction:column;counter-reset:s}
+.steps li{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--line);counter-increment:s}
+.steps li:last-child{border-bottom:1px solid var(--line)}
+.steps li::before{content:counter(s);width:34px;height:34px;border-radius:50%;background:var(--sage-wash);display:grid;place-items:center;font-weight:600;font-size:15px}
+.steps b{display:block;font-size:18px;font-weight:600}
+.steps p{font-size:16px;color:var(--ink-2);line-height:1.4}
+.phone{background:var(--white);border-radius:28px;padding:18px;display:flex;flex-direction:column;gap:10px;box-shadow:var(--shadow)}
+.phone .top{font-size:13px;color:var(--ink-2);display:flex;justify-content:space-between;padding:0 4px 8px;border-bottom:1px solid var(--line)}
+.bub{background:var(--paper-2);border-radius:14px 14px 14px 4px;padding:9px 13px;font-size:14.5px;line-height:1.4;max-width:90%}
+.bub.me{align-self:flex-end;background:#dcefd4;border-radius:14px 14px 4px 14px}
+.chips{display:flex;gap:8px}
+.chips span{flex:1;text-align:center;border:1px solid var(--line);border-radius:10px;padding:8px;font-weight:500;font-size:14px}
+.voice{display:flex;align-items:center;gap:10px}
+.voice i{flex:1;height:14px;background:repeating-linear-gradient(90deg,var(--leaf) 0 3px,transparent 3px 6px);opacity:.6;border-radius:4px}
+
+/* flow svg */
+.flow svg{width:100%;height:auto;display:block}
+
+/* who */
+.who{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.who .card{padding:20px;gap:8px}
+.who .card b{font-family:var(--serif);font-weight:500;font-size:21px;line-height:1.2}
+.who .card p{font-size:17px}
+.prov{margin-top:18px;display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;background:var(--white);border-radius:18px;padding:18px 24px;border:1px dashed #d25f2d66}
+.prov b{font-weight:600;font-size:17px}
+.prov p{font-size:15.5px;color:var(--ink-2);line-height:1.45}
+
+/* trust */
+.trust .card h3{font-size:24px}
+.chiprow{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.chiprow span{font-size:12.5px;font-weight:600;letter-spacing:.04em;border:1px solid var(--line);border-radius:8px;padding:4px 9px;color:var(--forest-2);background:var(--paper)}
+
+/* focus */
+.focus{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.focus .card{padding:20px}
+.focus .card h3{font-size:24px}
+.focus .card p{font-size:17px}
+.art{margin-top:16px;display:flex;gap:18px;align-items:baseline;padding:14px 20px;border-radius:14px;background:var(--white);border:1px dashed #d25f2d66}
+.art b{font-size:15px;font-weight:600;white-space:nowrap}
+.art p{font-size:15px;color:var(--ink-2)}
+
+/* road */
+.road{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.ph{padding-right:22px;display:flex;flex-direction:column;gap:10px}
+.ph .dot{display:flex;align-items:center;margin-bottom:6px}
+.ph .dot i{width:16px;height:16px;border-radius:50%;background:var(--forest);flex:none}
+.ph .dot s{flex:1;height:2px;background:var(--line);text-decoration:none}
+.ph.hl .dot i{background:var(--terracotta);box-shadow:0 0 0 6px var(--terracotta-wash)}
+.ph .when{font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
+.ph ul{padding-left:18px;font-size:16px;line-height:1.45;color:var(--ink-2);display:flex;flex-direction:column;gap:4px}
+.ph .gate{margin-top:6px;font-size:14.5px;line-height:1.4;color:var(--forest-2);background:var(--sage-wash);border-radius:10px;padding:9px 12px}
+.ph.hl .gate{background:var(--terracotta-wash)}
+
+/* partners */
+.partners{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.partners .card{padding:20px;gap:8px}
+.partners .card b{font-size:19px;font-weight:600;color:var(--forest)}
+.partners .card p{font-size:16.5px}
+.partners .card .k{font-size:15px}
+
+/* ask */
+.asks{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.ask{display:grid;grid-template-columns:44px 1fr;gap:14px;background:rgba(255,255,255,.06);border:1px solid rgba(230,238,221,.2);border-radius:18px;padding:20px}
+.ask i{width:36px;height:36px;border-radius:50%;background:var(--peach);color:var(--forest);display:grid;place-items:center;font-style:normal;font-weight:700;font-size:13px;letter-spacing:.04em}
+.ask b{display:block;color:#fff;font-size:19px;font-weight:600;margin-bottom:4px}
+.ask p{font-size:16px;line-height:1.45;color:var(--on-forest-2)}
+.give{margin-top:20px;font-size:17px;color:var(--on-forest-2)}
+
+/* team */
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.person{background:var(--white);border-radius:22px;padding:28px;display:flex;flex-direction:column;gap:10px;box-shadow:var(--shadow-sm)}
+.person .av{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-size:26px;color:#fff;background:var(--forest)}
+.person .av.t{background:var(--terracotta)}
+.person .av.l{background:var(--leaf)}
+.person b{font-family:var(--serif);font-weight:500;font-size:26px}
+.person .r{font-size:14px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--terracotta)}
+.person p{font-size:16.5px;color:var(--ink-2);line-height:1.45}
+
+/* close */
+.close{justify-content:center;align-items:center;text-align:center}
+.close h2{font-size:68px;max-width:980px}
+.close .contact{margin-top:34px;display:flex;gap:36px;justify-content:center;font-size:20px;color:var(--on-forest-2)}
+.close .contact b{color:#fff;font-weight:600;user-select:all}
+.close .teamline{margin-top:26px;font-size:17px;line-height:1.5;color:var(--on-forest-2)}
+.close .motto{margin-top:30px;font-family:var(--serif);font-style:italic;font-size:26px;color:var(--peach)}
+
+/* art therapy */
+.artx .card{padding:26px 28px;gap:14px}
+.artx .card.us{background:var(--forest)}
+.artx .card.us .k{color:var(--peach)}
+.pts{list-style:none;padding:0;display:flex;flex-direction:column;gap:11px}
+.pts li{font-size:18px;line-height:1.42;color:var(--ink-2);padding-left:18px;position:relative}
+.pts li::before{content:"";position:absolute;left:0;top:.6em;width:7px;height:7px;border-radius:50%;background:var(--terracotta)}
+.pts li b{color:var(--forest);font-weight:600}
+.us .pts li{color:var(--on-forest-2)}
+.us .pts li b{color:#fff}
+.us .pts li::before{background:var(--peach)}
+.how{margin-top:16px;font-size:16px;line-height:1.45;color:var(--forest-2);background:var(--sage-wash);border-radius:14px;padding:12px 18px}
+
+/* present mode */
+body.present{background:#0b2621;overflow:hidden}
+body.present .bar{display:none}
+body.present .deck{position:fixed;inset:0;max-width:none;padding:0;display:block}
+body.present .frame{display:none;position:absolute;top:50%;left:50%;width:calc(1280px * var(--ps,.5));height:calc(720px * var(--ps,.5));transform:translate(-50%,-50%);border-radius:0;aspect-ratio:auto}
+body.present .frame.on{display:block}
+.hint{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));font-size:12px;color:#b9cbbd;display:none;z-index:20}
+body.present .hint{display:block}
+@media (prefers-reduced-motion:no-preference){.frame{transition:box-shadow .2s}}
+
+.updown{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%);z-index:20;display:flex;flex-direction:column;gap:8px}
+.updown button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--white);color:var(--forest);font-size:20px;line-height:1;cursor:pointer;box-shadow:0 6px 18px -8px #0006;display:grid;place-items:center}
+.updown button:disabled{opacity:.35;cursor:default}
+.updown button:focus-visible{outline:2px solid var(--terracotta);outline-offset:3px}
+</style>
+</head>
+<body>
+
+
+<main class="deck" id="deck">
+
+<!-- 1 -->
+<div class="frame"><section class="slide title">
+  <div class="mark"><svg viewBox="0 0 31 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M15.1491 11.3295C18.2037 11.3295 20.6888 8.84436 20.6888 5.78973C20.6888 2.73509 18.2037 0.25 15.1491 0.25C12.0945 0.25 9.60938 2.73509 9.60938 5.78973C9.60938 8.84436 12.0945 11.3295 15.1491 11.3295ZM11.3326 5.78973C11.3326 3.68528 13.0447 1.97322 15.1491 1.97322C17.2535 1.97322 18.9655 3.68528 18.9655 5.78973C18.9655 7.89417 17.2535 9.60623 15.1491 9.60623C13.0447 9.60623 11.3326 7.89417 11.3326 5.78973Z" fill="#D25F2D" stroke="#D25F2D" stroke-width="0.5"/><path d="M28.4076 12.3365C27.3393 11.277 25.923 10.6934 24.4194 10.6934L24.3686 10.6936C23.578 10.7004 22.7873 10.7695 22.0183 10.8987C21.0135 11.0671 20.0217 11.3417 19.071 11.7147C18.957 11.7591 18.837 11.8079 18.7046 11.8638C18.4553 11.9689 18.2049 12.083 17.9603 12.2028L17.9268 12.2191C17.0658 12.6427 16.1044 12.8667 15.1458 12.8668C14.1884 12.8668 13.2273 12.6431 12.3662 12.2196L12.331 12.2023C12.0898 12.0842 11.84 11.9703 11.5881 11.8638C11.4624 11.8109 11.3393 11.7608 11.2218 11.7147C10.2707 11.3416 9.27894 11.0671 8.27407 10.8988C7.50503 10.7695 6.71424 10.7004 5.92236 10.6935L5.87284 10.6934C4.36928 10.6934 2.95284 11.2769 1.88444 12.3366C0.829799 13.3824 0.249417 14.767 0.25 16.2348C0.251334 19.2882 2.73651 21.7723 5.78989 21.7723C6.62637 21.7723 7.46235 21.7031 8.27482 21.5666L8.30466 21.5616C8.73124 21.4892 9.14931 21.6218 9.45317 21.9257C9.75687 22.2295 9.88967 22.6481 9.81731 23.0747L9.81231 23.1045C9.67576 23.9164 9.60656 24.7523 9.60656 25.589C9.60656 28.6428 12.0911 31.1278 15.146 31.1285C16.6134 31.1285 17.9973 30.5477 19.0427 29.4933C20.1153 28.4115 20.6986 26.9771 20.6853 25.4543C20.6784 24.6639 20.6094 23.8734 20.4802 23.1048L20.475 23.074C20.4027 22.648 20.5355 22.2295 20.8392 21.9257C21.143 21.622 21.5615 21.4893 21.9884 21.5616L22.0176 21.5665C22.8299 21.703 23.666 21.7723 24.5025 21.7723C27.5557 21.7723 30.0407 19.2882 30.042 16.2348C30.0426 14.7669 29.4622 13.3824 28.4076 12.3365ZM24.5033 20.0491L24.4443 20.0489C23.1456 20.0433 21.8443 19.7297 20.681 19.1418C19.5207 18.5555 18.4933 17.6946 17.7095 16.6522C17.6428 16.5635 17.4575 16.3478 17.1427 15.9928C16.9543 15.7803 16.868 15.497 16.906 15.2154C16.9442 14.9331 17.1031 14.6822 17.3419 14.527C17.4643 14.4474 17.5892 14.3692 17.7131 14.2944C18.1166 14.0508 18.5352 13.8281 18.9578 13.6324C20.6649 12.839 22.4986 12.4299 24.4084 12.4166L24.4359 12.4164C25.4719 12.4164 26.4497 12.8198 27.1894 13.5523C27.9147 14.2704 28.3158 15.2184 28.3188 16.2212C28.3218 17.2411 27.9256 18.2017 27.2034 18.926C26.4813 19.6503 25.5221 20.0491 24.5033 20.0491ZM18.9623 25.4937C18.9696 26.5403 18.5664 27.5282 17.8269 28.2753C17.1087 29.0008 16.161 29.4021 15.146 29.4052C14.1307 29.4052 13.1744 29.0093 12.4533 28.2902C11.7288 27.5681 11.3298 26.6087 11.3298 25.589C11.3298 23.6464 11.7388 21.7809 12.5454 20.0443C12.7431 19.6185 12.9661 19.1997 13.2084 18.7993C13.5589 18.2181 13.9603 17.6572 14.4102 17.1218C14.5942 16.9076 14.8624 16.7848 15.1462 16.7848C15.43 16.7848 15.6983 16.9078 15.8912 17.1326C16.3307 17.6554 16.7321 18.2162 17.0844 18.7996C17.3279 19.2029 17.5507 19.6216 17.7466 20.0443C18.5399 21.7512 18.9489 23.5846 18.9623 25.4937ZM13.1495 15.9929C12.8355 16.3471 12.6502 16.5627 12.583 16.6522C11.7991 17.6947 10.7716 18.5556 9.6114 19.1418C8.44822 19.7297 7.14698 20.0433 5.84875 20.0489L5.78989 20.0491C4.77026 20.0491 3.81091 19.6502 3.08864 18.9259C2.36645 18.2016 1.97031 17.2411 1.97331 16.2214C1.97614 15.2185 2.37712 14.2707 3.10256 13.5523C3.84225 12.8198 4.82012 12.4164 5.85608 12.4164L5.88393 12.4166C7.79347 12.4298 9.62724 12.8388 11.3346 13.6324C11.757 13.8281 12.1759 14.051 12.5798 14.2949C12.7046 14.3701 12.8293 14.4483 12.9503 14.527C13.1892 14.6823 13.3481 14.9331 13.3863 15.2154C13.4244 15.497 13.3381 15.7803 13.1495 15.9929Z" fill="#D25F2D" stroke="#D25F2D" stroke-width="0.5"/></svg></div>
+  <span class="eyebrow">Elder care at home · Care coordination</span>
+  <h1>Ageing at home,<br><em>with a plan.</em></h1>
+  <p class="sub">Care coordination for ageing parents at home, with the whole family in the loop.</p>
+  <div class="bottom">
+    <svg role="img" aria-label="SaralCare" viewBox="0 0 119 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15.1491 11.3295C18.2037 11.3295 20.6888 8.84436 20.6888 5.78973C20.6888 2.73509 18.2037 0.25 15.1491 0.25C12.0945 0.25 9.60938 2.73509 9.60938 5.78973C9.60938 8.84436 12.0945 11.3295 15.1491 11.3295ZM11.3326 5.78973C11.3326 3.68528 13.0447 1.97322 15.1491 1.97322C17.2535 1.97322 18.9655 3.68528 18.9655 5.78973C18.9655 7.89417 17.2535 9.60623 15.1491 9.60623C13.0447 9.60623 11.3326 7.89417 11.3326 5.78973Z" fill="#D25F2D" stroke="#D25F2D" stroke-width="0.5"/>
+<path d="M28.4076 12.3365C27.3393 11.277 25.923 10.6934 24.4194 10.6934L24.3686 10.6936C23.578 10.7004 22.7873 10.7695 22.0183 10.8987C21.0135 11.0671 20.0217 11.3417 19.071 11.7147C18.957 11.7591 18.837 11.8079 18.7046 11.8638C18.4553 11.9689 18.2049 12.083 17.9603 12.2028L17.9268 12.2191C17.0658 12.6427 16.1044 12.8667 15.1458 12.8668C14.1884 12.8668 13.2273 12.6431 12.3662 12.2196L12.331 12.2023C12.0898 12.0842 11.84 11.9703 11.5881 11.8638C11.4624 11.8109 11.3393 11.7608 11.2218 11.7147C10.2707 11.3416 9.27894 11.0671 8.27407 10.8988C7.50503 10.7695 6.71424 10.7004 5.92236 10.6935L5.87284 10.6934C4.36928 10.6934 2.95284 11.2769 1.88444 12.3366C0.829799 13.3824 0.249417 14.767 0.25 16.2348C0.251334 19.2882 2.73651 21.7723 5.78989 21.7723C6.62637 21.7723 7.46235 21.7031 8.27482 21.5666L8.30466 21.5616C8.73124 21.4892 9.14931 21.6218 9.45317 21.9257C9.75687 22.2295 9.88967 22.6481 9.81731 23.0747L9.81231 23.1045C9.67576 23.9164 9.60656 24.7523 9.60656 25.589C9.60656 28.6428 12.0911 31.1278 15.146 31.1285C16.6134 31.1285 17.9973 30.5477 19.0427 29.4933C20.1153 28.4115 20.6986 26.9771 20.6853 25.4543C20.6784 24.6639 20.6094 23.8734 20.4802 23.1048L20.475 23.074C20.4027 22.648 20.5355 22.2295 20.8392 21.9257C21.143 21.622 21.5615 21.4893 21.9884 21.5616L22.0176 21.5665C22.8299 21.703 23.666 21.7723 24.5025 21.7723C27.5557 21.7723 30.0407 19.2882 30.042 16.2348C30.0426 14.7669 29.4622 13.3824 28.4076 12.3365ZM24.5033 20.0491L24.4443 20.0489C23.1456 20.0433 21.8443 19.7297 20.681 19.1418C19.5207 18.5555 18.4933 17.6946 17.7095 16.6522C17.6428 16.5635 17.4575 16.3478 17.1427 15.9928C16.9543 15.7803 16.868 15.497 16.906 15.2154C16.9442 14.9331 17.1031 14.6822 17.3419 14.527C17.4643 14.4474 17.5892 14.3692 17.7131 14.2944C18.1166 14.0508 18.5352 13.8281 18.9578 13.6324C20.6649 12.839 22.4986 12.4299 24.4084 12.4166L24.4359 12.4164C25.4719 12.4164 26.4497 12.8198 27.1894 13.5523C27.9147 14.2704 28.3158 15.2184 28.3188 16.2212C28.3218 17.2411 27.9256 18.2017 27.2034 18.926C26.4813 19.6503 25.5221 20.0491 24.5033 20.0491ZM18.9623 25.4937C18.9696 26.5403 18.5664 27.5282 17.8269 28.2753C17.1087 29.0008 16.161 29.4021 15.146 29.4052C14.1307 29.4052 13.1744 29.0093 12.4533 28.2902C11.7288 27.5681 11.3298 26.6087 11.3298 25.589C11.3298 23.6464 11.7388 21.7809 12.5454 20.0443C12.7431 19.6185 12.9661 19.1997 13.2084 18.7993C13.5589 18.2181 13.9603 17.6572 14.4102 17.1218C14.5942 16.9076 14.8624 16.7848 15.1462 16.7848C15.43 16.7848 15.6983 16.9078 15.8912 17.1326C16.3307 17.6554 16.7321 18.2162 17.0844 18.7996C17.3279 19.2029 17.5507 19.6216 17.7466 20.0443C18.5399 21.7512 18.9489 23.5846 18.9623 25.4937ZM13.1495 15.9929C12.8355 16.3471 12.6502 16.5627 12.583 16.6522C11.7991 17.6947 10.7716 18.5556 9.6114 19.1418C8.44822 19.7297 7.14698 20.0433 5.84875 20.0489L5.78989 20.0491C4.77026 20.0491 3.81091 19.6502 3.08864 18.9259C2.36645 18.2016 1.97031 17.2411 1.97331 16.2214C1.97614 15.2185 2.37712 14.2707 3.10256 13.5523C3.84225 12.8198 4.82012 12.4164 5.85608 12.4164L5.88393 12.4166C7.79347 12.4298 9.62724 12.8388 11.3346 13.6324C11.757 13.8281 12.1759 14.051 12.5798 14.2949C12.7046 14.3701 12.8293 14.4483 12.9503 14.527C13.1892 14.6823 13.3481 14.9331 13.3863 15.2154C13.4244 15.497 13.3381 15.7803 13.1495 15.9929Z" fill="#D25F2D" stroke="#D25F2D" stroke-width="0.5"/>
+<path d="M56.2517 12.6077C55.6775 12.3263 54.9711 12.1855 54.1323 12.1855C53.3275 12.1855 52.6352 12.3179 52.0554 12.5824C51.4756 12.8469 51.0112 13.21 50.6622 13.6716C50.3133 14.1275 50.0854 14.6481 49.9785 15.2335H52.6548C52.728 14.9296 52.8829 14.6847 53.1192 14.499C53.3556 14.3076 53.6764 14.2119 54.0818 14.2119C54.5039 14.2119 54.8304 14.3273 55.0611 14.5581C55.292 14.7888 55.4074 15.1209 55.4074 15.5544V15.6578C55.2434 15.7001 55.0335 15.7417 54.774 15.7823C54.3124 15.8555 53.7751 15.909 53.1615 15.9427C52.4015 15.9878 51.7626 16.1172 51.2449 16.3311C50.7326 16.545 50.3442 16.8433 50.0798 17.2261C49.8208 17.6032 49.6914 18.0704 49.6914 18.6276C49.6914 19.2243 49.8321 19.7309 50.1135 20.1474C50.395 20.5639 50.7748 20.8819 51.2534 21.1015C51.7374 21.321 52.2863 21.4307 52.8997 21.4307C53.288 21.4307 53.6287 21.3913 53.9212 21.3126C54.2196 21.2393 54.4869 21.124 54.7235 20.9664C54.9598 20.8031 55.4074 20.35 55.4074 20.35V21.169H57.9992V15.7992C57.9992 15.0225 57.8502 14.3667 57.5518 13.832C57.2591 13.2916 56.8256 12.8835 56.2517 12.6077ZM55.3482 18.1548C55.3144 18.3744 55.2469 18.5685 55.1456 18.7374C55.05 18.9175 54.926 19.0667 54.774 19.1849C54.6276 19.3031 54.4616 19.3903 54.2758 19.4466C54.0957 19.5029 53.896 19.531 53.6764 19.531C53.4176 19.531 53.1896 19.4916 52.9927 19.4128C52.8012 19.3341 52.652 19.2187 52.5451 19.0667C52.4438 18.9091 52.3932 18.7177 52.3932 18.4926C52.3932 18.3012 52.4324 18.1407 52.5113 18.0113C52.5958 17.8762 52.7308 17.7664 52.9167 17.682C53.1079 17.5976 53.3584 17.5385 53.6681 17.5047C54.0171 17.4653 54.3238 17.4287 54.5884 17.3949C54.8528 17.3556 55.0781 17.3105 55.2639 17.2598C55.3146 17.246 55.3621 17.2309 55.4074 17.2149V17.4456C55.4074 17.6989 55.3876 17.9353 55.3482 18.1548Z" fill="#11473D"/>
+<path d="M64.2605 12.3125C62.9162 12.3125 62.4282 13.3763 62.4282 13.3763C62.4282 13.3763 62.4393 12.5883 62.4282 12.4645H59.7266V21.1693H62.4282V16.5932C62.4282 16.3736 62.4423 16.171 62.4704 15.9852C62.5042 15.7995 62.5549 15.6363 62.6225 15.4956C62.69 15.3548 62.7745 15.231 62.8758 15.124C63.0222 14.9721 63.1995 14.8623 63.4077 14.7948C63.6216 14.7216 63.8832 14.685 64.1929 14.685C64.3223 14.685 64.4545 14.6906 64.5896 14.7019C64.7248 14.7075 64.8571 14.7216 64.9864 14.7441V12.38C64.8965 12.3575 64.7839 12.3406 64.6488 12.3294C64.5192 12.3181 64.3898 12.3125 64.2605 12.3125Z" fill="#11473D"/>
+<path d="M46.8688 14.7779C46.2046 14.412 45.3547 14.1137 44.319 13.883C43.9025 13.7873 43.5732 13.6775 43.3312 13.5537C43.0891 13.4298 42.9146 13.2807 42.8077 13.1062C42.7007 12.9317 42.6473 12.7263 42.6473 12.4898C42.6473 12.1296 42.7767 11.8426 43.0357 11.6287C43.2946 11.4148 43.6548 11.3078 44.1164 11.3078C44.4485 11.3078 44.7271 11.3641 44.9522 11.4767C45.183 11.5893 45.3603 11.7497 45.4841 11.958C45.6136 12.1662 45.698 12.4195 45.7374 12.7178H48.5828C48.5152 11.958 48.2929 11.3106 47.9157 10.7759C47.5443 10.2412 47.0349 9.8331 46.3875 9.55163C45.7403 9.26457 44.9776 9.12109 44.0995 9.12109C43.1932 9.12109 42.4081 9.26739 41.7439 9.56008C41.0853 9.84719 40.5759 10.2609 40.2157 10.8012C39.8554 11.336 39.6753 11.9664 39.6753 12.6925C39.6753 13.3679 39.8188 13.9505 40.1059 14.4402C40.393 14.9242 40.8433 15.338 41.4568 15.6814C42.076 16.0191 42.878 16.3005 43.8631 16.5257C44.3809 16.6438 44.7834 16.7677 45.0704 16.8971C45.3575 17.0266 45.5573 17.1814 45.6699 17.3615C45.7881 17.5416 45.8472 17.7667 45.8472 18.0369C45.8472 18.279 45.7825 18.4929 45.653 18.6786C45.5292 18.8643 45.3462 19.0079 45.1042 19.1092C44.8622 19.2105 44.5751 19.2612 44.243 19.2612C43.8321 19.2612 43.4747 19.1936 43.1707 19.0586C42.8724 18.9178 42.6332 18.7152 42.4531 18.4507C42.2786 18.1805 42.166 17.854 42.1153 17.4713H39.2109C39.2729 18.248 39.5093 18.9375 39.9202 19.5398C40.331 20.1421 40.8967 20.6149 41.6172 20.9583C42.3433 21.296 43.1989 21.4648 44.1839 21.4648C45.1126 21.4648 45.9232 21.3213 46.6155 21.0342C47.3079 20.7415 47.8482 20.3222 48.2366 19.7763C48.625 19.2246 48.8191 18.566 48.8191 17.8006C48.8191 17.142 48.6587 16.565 48.3379 16.0697C48.0227 15.5688 47.533 15.1381 46.8688 14.7779Z" fill="#11473D"/>
+<path d="M72.1071 12.6077C71.533 12.3263 70.8266 12.1855 69.988 12.1855C69.1831 12.1855 68.4907 12.3179 67.9109 12.5824C67.3312 12.8469 66.8669 13.21 66.5179 13.6716C66.169 14.1275 65.9409 14.6481 65.834 15.2335H68.5105C68.5835 14.9296 68.7384 14.6847 68.9747 14.499C69.2112 14.3076 69.5321 14.2119 69.9372 14.2119C70.3594 14.2119 70.6859 14.3273 70.9168 14.5581C71.1474 14.7888 71.2629 15.1209 71.2629 15.5544V15.6578C71.099 15.7002 70.8891 15.7417 70.6297 15.7823C70.1681 15.8555 69.6305 15.909 69.0169 15.9427C68.2572 15.9878 67.6183 16.1172 67.1004 16.3311C66.5883 16.545 66.1999 16.8433 65.9352 17.2261C65.6763 17.6032 65.5469 18.0704 65.5469 18.6276C65.5469 19.2243 65.6876 19.7309 65.969 20.1474C66.2504 20.5639 66.6305 20.8819 67.1088 21.1015C67.5929 21.321 68.1417 21.4307 68.7553 21.4307C69.1437 21.4307 69.4842 21.3913 69.7769 21.3126C70.0751 21.2393 70.3426 21.124 70.5789 20.9664C70.8155 20.8031 71.0348 20.5977 71.2376 20.35C71.2938 20.2825 71.3417 20.2346 71.3812 20.2065C71.4204 20.1727 71.4683 20.1558 71.5247 20.1558C71.626 20.1558 71.6992 20.2346 71.744 20.3923C71.7724 20.4823 71.7976 20.5977 71.8201 20.7384C71.8427 20.8735 71.8566 21.017 71.8623 21.169H73.8549V15.7992C73.8549 15.0225 73.7057 14.3667 73.4073 13.832C73.1148 13.2916 72.6813 12.8835 72.1071 12.6077ZM71.2039 18.1548C71.1701 18.3744 71.1024 18.5685 71.0011 18.7374C70.9054 18.9175 70.7815 19.0667 70.6297 19.1849C70.4833 19.3031 70.3173 19.3903 70.1315 19.4466C69.9514 19.5029 69.7516 19.531 69.5321 19.531C69.2731 19.531 69.045 19.4916 68.8481 19.4128C68.6567 19.3341 68.5077 19.2187 68.4007 19.0667C68.2994 18.9091 68.2487 18.7177 68.2487 18.4926C68.2487 18.3012 68.2881 18.1407 68.367 18.0113C68.4513 17.8762 68.5863 17.7664 68.7721 17.682C68.9636 17.5976 69.2141 17.5385 69.5236 17.5047C69.8725 17.4653 70.1792 17.4287 70.4439 17.3949C70.7085 17.3556 70.9335 17.3105 71.1193 17.2598C71.1701 17.246 71.2176 17.2309 71.2629 17.215V17.4456C71.2629 17.6989 71.2431 17.9353 71.2039 18.1548Z" fill="#11473D"/>
+<path d="M78.2956 8.96094H75.5938V21.1696H78.2956V8.96094Z" fill="#11473D"/>
+<path d="M83.7635 12.6841C84.0506 12.3632 84.3995 12.1155 84.8105 11.941C85.2213 11.7609 85.68 11.6709 86.1867 11.6709C86.7214 11.6709 87.2026 11.7721 87.6304 11.9748C88.0582 12.1718 88.4071 12.4561 88.6775 12.8276C88.9532 13.1934 89.1305 13.6353 89.2094 14.1532H92.2151C92.1756 13.4608 92.0068 12.8107 91.7084 12.2028C91.4102 11.5949 90.9964 11.0601 90.4673 10.5986C89.9382 10.137 89.3078 9.77678 88.5762 9.51791C87.8443 9.25335 87.017 9.12109 86.0939 9.12109C85.1651 9.12109 84.3095 9.27302 83.5271 9.57699C82.7447 9.88091 82.0693 10.3115 81.5008 10.8688C80.9322 11.426 80.4905 12.0818 80.1751 12.836C79.8656 13.5846 79.7109 14.4036 79.7109 15.2929C79.7109 16.0022 79.8122 16.672 80.0148 17.3024C80.2174 17.9272 80.5045 18.4957 80.8761 19.0079C81.2531 19.5145 81.7033 19.9535 82.227 20.325C82.7561 20.6909 83.3442 20.9723 83.9915 21.1693C84.6443 21.3663 85.3453 21.4648 86.0939 21.4648C87.017 21.4648 87.8443 21.3353 88.5762 21.0765C89.3078 20.8119 89.9382 20.4489 90.4673 19.9873C90.9964 19.5258 91.4102 18.991 91.7084 18.3831C92.0068 17.7752 92.1756 17.1251 92.2151 16.4328H89.2094C89.0968 17.2095 88.7646 17.8174 88.2131 18.2565C87.667 18.6955 86.9915 18.915 86.1867 18.915C85.7813 18.915 85.4043 18.8588 85.0553 18.7462C84.7121 18.6336 84.4052 18.4703 84.1351 18.2565C83.8704 18.0426 83.6426 17.7865 83.4511 17.4881C83.2596 17.1898 83.1135 16.8577 83.012 16.4918C82.9164 16.1203 82.8687 15.7208 82.8687 15.2929C82.8687 14.7582 82.9445 14.2713 83.0965 13.8323C83.2542 13.3876 83.4764 13.0049 83.7635 12.6841Z" fill="#11473D"/>
+<path d="M99.5251 12.6077C98.9509 12.3263 98.2446 12.1855 97.4057 12.1855C96.6009 12.1855 95.9087 12.3179 95.3288 12.5824C94.749 12.8469 94.2846 13.21 93.9357 13.6716C93.5867 14.1275 93.3589 14.6481 93.2519 15.2335H95.9283C96.0015 14.9296 96.1563 14.6847 96.3927 14.499C96.629 14.3076 96.9498 14.2119 97.3552 14.2119C97.7773 14.2119 98.1039 14.3273 98.3345 14.5581C98.5654 14.7888 98.6809 15.1209 98.6809 15.5544V15.6578C98.5169 15.7001 98.3069 15.7417 98.0474 15.7823C97.5859 15.8555 97.0485 15.909 96.4349 15.9427C95.675 15.9878 95.0361 16.1172 94.5183 16.3311C94.006 16.545 93.6176 16.8433 93.3532 17.2261C93.0942 17.6032 92.9648 18.0704 92.9648 18.6276C92.9648 19.2243 93.1056 19.7309 93.387 20.1474C93.6684 20.5639 94.0483 20.8819 94.5268 21.1015C95.0108 21.321 95.5597 21.4307 96.1731 21.4307C96.5615 21.4307 96.9021 21.3913 97.1947 21.3126C97.4931 21.2393 97.7603 21.124 97.9969 20.9664C98.2332 20.8031 98.6809 20.35 98.6809 20.35V21.169H101.273V15.7992C101.273 15.0225 101.124 14.3667 100.825 13.832C100.533 13.2916 100.099 12.8835 99.5251 12.6077ZM98.6216 18.1548C98.5878 18.3744 98.5203 18.5685 98.419 18.7374C98.3234 18.9175 98.1995 19.0667 98.0474 19.1849C97.9011 19.3031 97.7351 19.3903 97.5493 19.4466C97.3691 19.5029 97.1694 19.531 96.9498 19.531C96.6911 19.531 96.463 19.4916 96.2661 19.4128C96.0746 19.3341 95.9254 19.2187 95.8185 19.0667C95.7172 18.9091 95.6667 18.7177 95.6667 18.4926C95.6667 18.3012 95.7059 18.1407 95.7847 18.0113C95.8692 17.8762 96.0043 17.7664 96.1901 17.682C96.3813 17.5976 96.6318 17.5385 96.9416 17.5047C97.2905 17.4653 97.5972 17.4287 97.8619 17.3949C98.1263 17.3556 98.3515 17.3105 98.5373 17.2598C98.5881 17.246 98.6355 17.2309 98.6809 17.2149V17.4456C98.6809 17.6989 98.661 17.9353 98.6216 18.1548Z" fill="#11473D"/>
+<path d="M107.542 12.3125C106.197 12.3125 105.709 13.3763 105.709 13.3763C105.709 13.3763 105.721 12.5883 105.709 12.4645H103.008V21.1693H105.709V16.5932C105.709 16.3736 105.724 16.171 105.752 15.9852C105.785 15.7995 105.836 15.6363 105.904 15.4956C105.971 15.3548 106.056 15.231 106.157 15.124C106.303 14.9721 106.481 14.8623 106.689 14.7948C106.903 14.7216 107.164 14.685 107.474 14.685C107.604 14.685 107.736 14.6906 107.871 14.7019C108.006 14.7075 108.138 14.7216 108.268 14.7441V12.38C108.178 12.3575 108.065 12.3406 107.93 12.3294C107.8 12.3181 107.671 12.3125 107.542 12.3125Z" fill="#11473D"/>
+<path d="M117.461 14.2879C117.079 13.6293 116.544 13.1143 115.857 12.7428C115.176 12.3713 114.388 12.1855 113.493 12.1855C112.592 12.1855 111.79 12.3826 111.087 12.7766C110.383 13.165 109.829 13.7082 109.424 14.4061C109.024 15.0985 108.824 15.9034 108.824 16.8208C108.824 17.5132 108.939 18.1436 109.17 18.712C109.401 19.2806 109.725 19.7703 110.141 20.1811C110.558 20.5864 111.05 20.8988 111.619 21.1184C112.187 21.3379 112.812 21.4476 113.493 21.4476C114.276 21.4476 114.968 21.3238 115.57 21.0761C116.178 20.8284 116.679 20.4767 117.073 20.0208C117.467 19.5648 117.737 19.0301 117.884 18.4166H115.249C115.176 18.6192 115.061 18.7937 114.903 18.9401C114.751 19.0864 114.56 19.1989 114.329 19.2777C114.098 19.3509 113.836 19.3875 113.544 19.3875C113.246 19.3875 112.975 19.3425 112.733 19.2524C112.491 19.1624 112.28 19.0329 112.1 18.864C111.926 18.6895 111.79 18.4841 111.695 18.2477C111.618 18.0547 111.574 17.8432 111.559 17.6145H117.968C117.996 17.5075 118.016 17.3527 118.027 17.1501C118.038 16.9475 118.044 16.7589 118.044 16.5844C118.044 15.712 117.85 14.9465 117.461 14.2879ZM112.522 14.4652C112.815 14.3019 113.153 14.2204 113.535 14.2204C113.901 14.2204 114.225 14.2963 114.506 14.4483C114.788 14.5946 115.01 14.8085 115.173 15.09C115.322 15.3409 115.402 15.6409 115.42 15.9849H111.564C111.601 15.6617 111.691 15.3733 111.838 15.1238C112.007 14.8423 112.235 14.6228 112.522 14.4652Z" fill="#11473D"/>
+</svg>
+    <p>Proposal to Aging with Agency<br>A Lighthouse Grand Challenge, 2026</p>
+  </div>
+</section></div>
+
+<!-- 2 -->
+<div class="frame"><section class="slide oat">
+  <span class="eyebrow">Why now</span>
+  <h2>India is ageing faster than <em>its families can reorganise.</em></h2>
+  <div class="body">
+    <div class="stats">
+      <div class="stat hero">
+        <b>149M<span class="arrow">→</span>347M</b>
+        <p>Indians aged 60 and over, today and by 2050.</p>
+        <small>India Ageing Report 2023, UNFPA and IIPS</small>
+      </div>
+      <div class="stat">
+        <b>1 in 5</b>
+        <p>Indians will be over 60 by 2050.</p>
+        <small>Lighthouse Grand Challenge</small>
+      </div>
+      <div class="stat">
+        <b>26%</b>
+        <p>higher risk of early death linked to loneliness.</p>
+        <small>Holt-Lunstad et al., 2015</small>
+      </div>
+    </div>
+  </div>
+  <span class="num">02</span>
+</section></div>
+
+<!-- 4 -->
+<div class="frame"><section class="slide oat gap">
+  <span class="eyebrow">The problem</span>
+  <h2>The hospital knows but doesn't stay. <em>The agency stays but doesn't know.</em></h2>
+  <div class="body g3">
+    <div class="col"><h3>Hospital</h3><div class="yn"><div>Knows the medicine <span class="y">Yes</span></div><div>Stays with the family <span class="n">No</span></div></div><p>Treats, then discharges.</p></div>
+    <div class="col"><h3>Home-care agency</h3><div class="yn"><div>Knows the medicine <span class="n">No</span></div><div>Stays with the family <span class="y">Yes</span></div></div><p>Sees only the shift.</p></div>
+    <div class="col us"><h3>SaralCare</h3><div class="yn"><div>Knows the medicine <span class="y">Yes</span></div><div>Stays with the family <span class="y">Yes</span></div></div><p>One coordinator holds it all together.</p></div>
+  </div>
+  <span class="num">03</span>
+</section></div>
+
+<!-- 5 -->
+<div class="frame"><section class="slide">
+  <span class="eyebrow">What we do</span>
+  <h2>Care coordination. <em>One coordinator holds the whole system.</em></h2>
+  <div class="body rhythm">
+    <div class="card"><span class="when">At the start</span><p>A written care plan for the year.</p></div>
+    <div class="card"><span class="when">Every day</span><p>Medicine reminders. Missed doses followed up.</p></div>
+    <div class="card"><span class="when">Every week</span><p>Appointments booked. Family updated.</p></div>
+    <div class="card"><span class="when">Every month</span><p>Prescriptions, refills and paperwork handled.</p></div>
+    <div class="card"><span class="when">When something happens</span><p>A real person answers, any hour.</p></div>
+    <div class="card"><span class="when">Every quarter</span><p>The plan reviewed with the family.</p></div>
+  </div>
+  <span class="num">04</span>
+</section></div>
+
+<!-- 6 -->
+<div class="frame"><section class="slide dark">
+  <span class="eyebrow">Three circles of care</span>
+  <h2>Support that steps up <em>when life gets serious.</em></h2>
+  <div class="body circles">
+    <div class="circle">
+      <span class="deva" lang="hi">साथी</span><h3>Saathi</h3><span class="role">The companion</span>
+      <span class="verbs">Track · Record · Remind · Attend</span>
+      <ul><li>Medicine and appointment reminders</li><li>One health record</li><li>Family dashboard and check-ins</li></ul>
+    </div>
+    <div class="circle l2">
+      <span class="deva" lang="hi">सहायक</span><h3>Sahayak</h3><span class="role">The helper</span>
+      <span class="verbs">Listen · Arrange · Manage · Escort</span>
+      <span class="plus">Everything in Saathi, plus</span>
+      <ul><li>A named care manager</li><li>Doctor visits booked and escorted</li><li>Insurance and schemes handled</li></ul>
+    </div>
+    <div class="circle l3">
+      <span class="deva" lang="hi">रक्षक</span><h3>Rakshak</h3><span class="role">The guardian</span>
+      <span class="verbs">Protect · Decide · Defend · Advocate</span>
+      <span class="plus">Everything in Sahayak, plus</span>
+      <ul><li>24/7 emergency help</li><li>Hospital support and second opinions</li><li>Wills, care wishes, after-life coordination</li></ul>
+    </div>
+  </div>
+  <div class="drift"><span>Adrift</span><i></i><span>Anchored</span></div>
+  <span class="num">05</span>
+</section></div>
+
+<!-- 7 -->
+<div class="frame"><section class="slide oat">
+  <span class="eyebrow">The SaralCare app · live in beta · WhatsApp for the elder</span>
+  <h2>Everything about a parent's care, <em>in one place.</em></h2>
+  <div class="body app">
+    <div class="feat"><span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="6" rx="3"/><path d="M12 9v6"/></svg></span><b>Care plan</b><p>Medicines, doses and appointments.</p></div>
+    <div class="feat"><span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg></span><b>Diary</b><p>One calendar for everything.</p></div>
+    <div class="feat"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></span><b>Health trends</b><p>Readings, trends and insights.</p></div>
+    <div class="feat"><span class="ic"><svg viewBox="0 0 24 24"><path d="M5 4h10l4 4v12H5z"/><path d="M15 4v4h4"/></svg></span><b>Health vault</b><p>Every report, read and filed.</p></div>
+    <div class="feat"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V7z"/><path d="M12 8v5M12 16h.01"/></svg></span><b>Incident reporting</b><p>Tell us; our team takes over.</p></div>
+    <div class="feat"><span class="ic"><svg viewBox="0 0 24 24"><path d="M6 3h12v18H6z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span><b>Emergency sheet</b><p>Printed for the door.</p></div>
+    <div class="feat"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span><b>SOS and helplines</b><p>One tap to help.</p></div>
+    <div class="feat"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M3 19c0-3 3-5 6-5s6 2 6 5M15 19c0-2 1.5-3.5 4-3.5"/></svg></span><b>Family circle</b><p>The elder decides who sees what.</p></div>
+  </div>
+  <p class="foot">Elders reply on WhatsApp with one tap or a voice note.</p>
+  <span class="num">06</span>
+</section></div>
+
+<!-- 9 -->
+<div class="frame"><section class="slide oat flow">
+  <span class="eyebrow">When something happens</span>
+  <h2>Every alert reaches a person first, <em>then the right partner.</em></h2>
+  <div class="body">
+    <svg viewBox="0 0 1136 380" role="img" aria-label="Escalation flow: alert, coordinator, routine or care or emergency, then family and plan updated">
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8b978e"/></marker></defs>
+      <g fill="none" stroke="#8b978e" stroke-width="1.6">
+        <path d="M498 50H556" marker-end="url(#ar)"/>
+        <path d="M748 90V130M178 130H958"/>
+        <path d="M178 130V158" marker-end="url(#ar)"/><path d="M568 130V158" marker-end="url(#ar)"/><path d="M958 130V158" marker-end="url(#ar)"/>
+        <path d="M178 262V298" marker-end="url(#ar)"/><path d="M568 262V298" marker-end="url(#ar)"/><path d="M958 262V298" marker-end="url(#ar)"/>
+      </g>
+      <g font-family="Inter Tight, sans-serif" text-anchor="middle">
+        <rect x="188" y="10" width="310" height="80" rx="14" fill="#fff" stroke="#22463c33"/>
+        <text x="343" y="44" font-size="20" font-weight="600" fill="#11473d">Alert or question</text>
+        <text x="343" y="70" font-size="16" fill="#566860">Missed dose, fall, symptom, worry</text>
+        <rect x="558" y="10" width="380" height="80" rx="14" fill="#11473d"/>
+        <text x="748" y="44" font-size="20" font-weight="600" fill="#fff">A coordinator on the line</text>
+        <text x="748" y="70" font-size="16" fill="#e6eedd">Any hour, a real person answers</text>
+        <rect x="28" y="160" width="300" height="102" rx="14" fill="#fff" stroke="#22463c33"/>
+        <text x="178" y="194" font-size="20" font-weight="600" fill="#11473d">Routine</text>
+        <text x="178" y="220" font-size="16" fill="#566860">Reschedule or remind</text>
+        <text x="178" y="242" font-size="16" fill="#566860">Answer the family</text>
+        <rect x="418" y="160" width="300" height="102" rx="14" fill="#fff" stroke="#22463c33"/>
+        <text x="568" y="194" font-size="20" font-weight="600" fill="#11473d">Needs care</text>
+        <text x="568" y="220" font-size="16" fill="#566860">Doctor, nurse or home visit</text>
+        <text x="568" y="242" font-size="16" fill="#566860">Sahayak partners</text>
+        <rect x="808" y="160" width="300" height="102" rx="14" fill="#fbede6" stroke="#d25f2d" stroke-width="1.5"/>
+        <text x="958" y="194" font-size="20" font-weight="600" fill="#11473d">Emergency</text>
+        <text x="958" y="220" font-size="16" fill="#566860">108 and hospital partner</text>
+        <text x="958" y="242" font-size="16" fill="#566860">Rakshak care manager</text>
+        <rect x="28" y="300" width="1080" height="72" rx="14" fill="#ebf3e4"/>
+        <text x="568" y="332" font-size="20" font-weight="600" fill="#11473d">Family circle updated, care plan revised</text>
+        <text x="568" y="358" font-size="16" fill="#2f5648">Every step logged in the record; the plan is reviewed after any fall or hospital stay</text>
+      </g>
+    </svg>
+  </div>
+  <span class="num">07</span>
+</section></div>
+
+<!-- 10 -->
+<div class="frame"><section class="slide">
+  <span class="eyebrow">Who we serve</span>
+  <h2>Built for families, elders <em>and the people who care for them.</em></h2>
+  <div class="body">
+    <div class="who">
+      <div class="card"><span class="tag">Families</span><b>Children far away</b><p>See what the family at home sees.</p></div>
+      <div class="card"><span class="tag">Elders</span><b>Elders on their own</b><p>Their care, in their control.</p></div>
+      <div class="card"><span class="tag">Carers</span><b>The carer at home</b><p>A coordinator beside them.</p></div>
+      <div class="card"><span class="tag t">Providers</span><b>Home-care providers</b><p>Run care families can see.</p></div>
+      <div class="card"><span class="tag t">Hospitals</span><b>Hospitals and clinics</b><p>Follow-up after discharge.</p></div>
+    </div>
+  </div>
+  <span class="num">08</span>
+</section></div>
+
+<!-- 12 -->
+<div class="frame"><section class="slide">
+  <span class="eyebrow">What changes for a family</span>
+  <h2>Five things every ageing parent needs. <em>One service that covers them.</em></h2>
+  <div class="body">
+    <div class="focus">
+      <div class="card"><h3>Less alone</h3><p>Someone checks in every day.</p></div>
+      <div class="card"><h3>Staying well</h3><p>Medicines on time. Doctor visits that happen.</p></div>
+      <div class="card"><h3>When memory slips</h3><p>A steady routine and early warning.</p></div>
+      <div class="card"><h3>The carer, cared for</h3><p>We take the logistics.</p></div>
+      <div class="card"><h3>On their own terms</h3><p>Care at home. Their records, their choice.</p></div>
+    </div>
+  </div>
+  <span class="num">09</span>
+</section></div>
+
+<!-- 12b -->
+<div class="frame"><section class="slide oat plan">
+  <span class="eyebrow">Planning ahead, and after</span>
+  <h2>Plan before panic, <em>all the way through.</em></h2>
+  <div class="body g3">
+    <div class="card"><span class="k">While there is time</span><h3>Care wishes, written down</h3><p>What they want, and who decides if they cannot.</p></div>
+    <div class="card"><span class="k">In order</span><h3>Wills and legal papers</h3><p>A will and power of attorney, through legal partners.</p></div>
+    <div class="card"><span class="k">Afterwards</span><h3>After-life coordination</h3><p>Last rites, paperwork and support through grief.</p></div>
+  </div>
+  <span class="num">10</span>
+</section></div>
+
+<!-- art -->
+<div class="frame"><section class="slide artx">
+  <span class="eyebrow">Saral Kala · Art therapy</span>
+  <h2>Saral Kala: art therapy that builds <em>two communities.</em></h2>
+  <div class="body">
+    <div class="g3">
+      <div class="card">
+        <span class="k">A community for elders</span>
+        <ul class="pts"><li><b>Meet other elders</b> every week</li><li><b>Rehab</b> after a stroke or fall</li><li><b>Mood and memory</b> lifted</li></ul>
+      </div>
+      <div class="card">
+        <span class="k">A community for caregivers</span>
+        <ul class="pts"><li><b>Meet other caregivers</b> who understand</li><li><b>Share</b> what works at home</li><li><b>A break</b> of their own</li></ul>
+      </div>
+      <div class="card us">
+        <span class="k">For SaralCare</span>
+        <ul class="pts"><li><b>Families meet us</b> before a crisis</li><li><b>Trust</b> built in person</li><li><b>A brand</b> people can see</li></ul>
+      </div>
+    </div>
+    <p class="how">Open circles for elders and for caregivers, led by qualified art therapists as partners.</p>
+  </div>
+  <span class="num">11</span>
+</section></div>
+
+<!-- 14 -->
+<div class="frame"><section class="slide">
+  <span class="eyebrow">Where we're looking for partners</span>
+  <h2>We coordinate. <em>We need great people to coordinate with.</em></h2>
+  <div class="body partners">
+    <div class="card"><span class="k">Deliver care</span><b>Home-care and nursing providers</b><p>Deliver care with our tools.</p></div>
+    <div class="card"><span class="k">Continuity</span><b>Hospitals and clinics</b><p>Hand over at discharge.</p></div>
+    <div class="card"><span class="k">Clinical</span><b>Geriatricians and advisers</b><p>Join our clinical board.</p></div>
+    <div class="card"><span class="k">Services</span><b>Labs, pharmacies, physio and art therapists</b><p>Home tests, refills, rehab.</p></div>
+    <div class="card"><span class="k">Reach</span><b>Communities</b><p>Housing societies and senior groups.</p></div>
+    <div class="card"><span class="k">Access</span><b>CSR and insurers</b><p>Sponsor elders who cannot pay.</p></div>
+    <div class="card"><span class="k">Planning and after</span><b>Legal and end-of-life partners</b><p>Lawyers, hospice, last rites, grief support.</p></div>
+    <div class="card"><span class="k">Evidence and systems</span><b>Researchers and public programmes</b><p>Study outcomes; link with ABDM.</p></div>
+  </div>
+  <span class="num">12</span>
+</section></div>
+
+<!-- 15 -->
+<div class="frame"><section class="slide dark">
+  <span class="eyebrow">What we're asking Lighthouse for</span>
+  <h2>Help us take coordination <em>from one city to many.</em></h2>
+  <div class="body asks">
+    <div class="ask"><i>01</i><div><b>Connections</b><p>Hospitals, care providers, communities, CSR.</p></div></div>
+    <div class="ask"><i>02</i><div><b>Capacity</b><p>Expert review of our model and app.</p></div></div>
+    <div class="ask"><i>03</i><div><b>Support for a Bengaluru pilot</b><p>Seed support to run all three circles.</p></div></div>
+    <div class="ask"><i>04</i><div><b>Community</b><p>A place in the showcases.</p></div></div>
+  </div>
+  <p class="give">In return, we share our care-plan template, playbook and findings openly.</p>
+  <span class="num">13</span>
+</section></div>
+
+<!-- 17 -->
+<div class="frame"><section class="slide dark close">
+  <span class="eyebrow">SaralCare</span>
+  <h2>Let them stay home. <em>We'll help you keep watch.</em></h2>
+  <div class="contact"><span>WhatsApp <b>+91 98450 65330</b></span><span>Web <b>saralcare.com</b></span></div>
+  <p class="teamline">Ashwin S Kulkarni, CEO · Renuka S Kulkarni, CMO · Shruti Pande, COO · Sathya Sankaran, CTO<br>SaralCare Healthtech Pvt. Ltd., Bengaluru</p>
+  <p class="motto">Care, that knows.</p>
+</section></div>
+
+</main>
+
+
+<nav class="updown" aria-label="Slides"><button id="up" type="button" aria-label="Previous slide">↑</button><button id="down" type="button" aria-label="Next slide">↓</button></nav>
+<script>
+(function(){
+  var frames=[].slice.call(document.querySelectorAll('.frame'));
+  function fit(){
+    frames.forEach(function(f){
+      var sl=f.querySelector('.slide');
+      f.style.setProperty('--s',Math.min(f.clientWidth/1280,f.clientHeight/720));
+      f.style.background=getComputedStyle(sl).backgroundColor;
+    });
+  }
+  window.addEventListener('resize',fit);
+  if(window.ResizeObserver){new ResizeObserver(fit).observe(document.documentElement);}
+  var up=document.getElementById('up'), down=document.getElementById('down');
+  function cur(){var best=0,bd=Infinity;frames.forEach(function(f,i){var t=Math.abs(f.getBoundingClientRect().top);if(t<bd){bd=t;best=i;}});return best;}
+  function go(i){i=Math.max(0,Math.min(frames.length-1,i));frames[i].scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});}
+  function mark(){var c=cur();up.disabled=c===0;down.disabled=c===frames.length-1;}
+  up.addEventListener('click',function(){go(cur()-1);});
+  down.addEventListener('click',function(){go(cur()+1);});
+  window.addEventListener('scroll',mark,{passive:true});
+  mark();
+  fit();
+})();
+</script>
+
+</body>
+</html>
